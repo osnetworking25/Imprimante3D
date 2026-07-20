@@ -9,7 +9,7 @@
 ## Sous-dossiers / Subfolders
 
 - [`Creality Ender 3 Pro/`](./Creality%20Ender%203%20Pro/README.md) — firmware avec BLTouch, préparé pour un ami (carte mère 4.2.7). *Firmware with BLTouch, prepared for a friend (4.2.7 motherboard).*
-- [`Creality Ender 3 (2018)/`](./Creality%20Ender%203%20(2018)/README.md) — mon Ender 3 d'origine (carte 8 bits). *My original Ender 3 (8-bit board).*
+- [`Creality Ender 3 (2018)/`](./Creality%20Ender%203%20(2018)/README.md) — mon Ender 3 d'origine, passée sous Klipper (carte BigTreeTech Manta E3EZ+ / CB1). *My original Ender 3, upgraded to Klipper (BigTreeTech Manta E3EZ+ / CB1 board).*
 - [`Artillery Hornet/`](./Artillery%20Hornet/README.md) — mon Artillery Hornet, firmware avec BLTouch. *My Artillery Hornet, firmware with BLTouch.*
 
 ## Licence / License
