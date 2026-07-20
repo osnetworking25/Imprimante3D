@@ -36,3 +36,37 @@ Firmware construit à partir des sources Marlin officielles + configuration Crea
 ## Astuce VS Code : un profil par imprimante
 
 Pour éviter de mélanger les configurations entre plusieurs imprimantes dans VS Code, on peut créer un **profil dédié** (Gérer ⚙ → Profils → Nouveau profil), le nommer, copier le contenu du profil "Par défaut" (pour garder les extensions comme PlatformIO), puis l'associer au dossier du projet via "Ajouter un dossier". VS Code bascule alors automatiquement sur le bon profil à l'ouverture du dossier.
+
+## Licence / License
+
+MIT — voir / see [LICENSE](../LICENSE).
+
+---
+
+# English version
+
+## Context
+
+This project consists of preparing a Marlin firmware with BLTouch for an Ender 3 Pro fitted with a **4.2.7** motherboard (32-bit, silent, TMC2208/2225 drivers, CR10_STOCKDISPLAY screen).
+
+## What we learned about this board
+
+- Creality does not publish any source code for its 32-bit boards (4.2.2 / 4.2.7): only precompiled .bin files are available. The "Source Code" file on their website only covers the old 8-bit board (v1.1.6.1, 2019). This is a real GPL license compliance issue, already flagged by Marlin developers themselves.
+- There are two chip variants on this board: RE (512K flash) and RC (256K). They can only be told apart by the text engraved on the STM32 chip itself: RET6 = RE, RCT6 = RC. You need to open the printer and check the chip before compiling, otherwise the firmware won't work.
+- In platformio.ini, the default value default_envs = mega2560 matches old 8-bit (AVR) boards: it must be changed to STM32F103RE_creality or STM32F103RC_creality depending on the chip, otherwise the build fails with an incompatible environment error.
+
+## Marlin 2.1.2.8 (bugfix) firmware base
+
+Firmware built from the official Marlin sources plus the Creality V427 configuration, with BLTouch enabled: leveling and safety options (BLTOUCH, AUTO_BED_LEVELING_BILINEAR, Z_SAFE_HOMING, PROBE_OFFSET_WIZARD), and convenience/menu options (PRINTCOUNTER, INDIVIDUAL_AXIS_HOMING_MENU, LCD_INFO_MENU, POWER_LOSS_RECOVERY, SOUND_MENU_ITEM, SDCARD_SORT_ALPHA, BABYSTEP_ALWAYS_AVAILABLE, BABYSTEP_ZPROBE_OFFSET, LIN_ADVANCE).
+
+## Steps before flashing for real
+
+Identify the chip (RE or RC) and adjust platformio.ini accordingly. Mount the BLTouch and measure the X/Y offsets with calipers (nozzle to probe center). Check the BLTouch connector wiring order, since it can vary by manufacturer. Flash via SD card (.bin file at the root, FAT32 format). Finally, set the Z offset using the paper test.
+
+## Tip: one VS Code profile per printer
+
+To avoid mixing up configurations between several printers in VS Code, you can create a dedicated profile (Manage gear icon, then Profiles, then New profile), name it, copy the content of the "Default" profile to keep extensions like PlatformIO, then link it to the project folder via "Add folder". VS Code then automatically switches to the right profile when the folder is opened.
+
+## License
+
+MIT — see LICENSE file in the parent folder.
