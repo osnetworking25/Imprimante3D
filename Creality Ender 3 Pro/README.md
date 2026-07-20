@@ -1,4 +1,10 @@
 # Creality Ender 3 Pro (carte mère 4.2.7) — Firmware avec BLTouch
+*Creality Ender 3 Pro (4.2.7 motherboard) — Firmware with BLTouch*
+
+> 🇫🇷 Documentation et retour d'expérience sur la préparation d'un firmware Marlin avec BLTouch pour une Ender 3 Pro (carte 4.2.7) : compilation, réglages et étapes de calibration.
+> 🇬🇧 Documentation and field notes on preparing a Marlin firmware with BLTouch for an Ender 3 Pro (4.2.7 board): compilation, settings and calibration steps.
+
+---
 
 ## Contexte
 

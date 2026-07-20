@@ -1,4 +1,10 @@
 # Artillery Hornet — Firmware avec BLTouch
+*Artillery Hornet — Firmware with BLTouch*
+
+> 🇫🇷 Retour d'expérience sur l'ajout d'un BLTouch à mon Artillery Hornet : réglages Marlin, problèmes rencontrés (sonde bloquée, nivellement non appliqué) et leurs solutions.
+> 🇬🇧 Field notes on adding a BLTouch to my Artillery Hornet: Marlin settings, problems encountered (stuck probe, leveling not applied) and their fixes.
+
+---
 
 ## Contexte
 
@@ -37,3 +43,43 @@ Les profils système d'ArtillerySlicer sont verrouillés en écriture. Solution 
 - Offset sonde Z : **-1.4**
 
 Ces valeurs sont propres à ma sonde et mon montage — à ne pas réutiliser telles quelles sur une autre imprimante, mais elles donnent un ordre de grandeur.
+
+## Licence / License
+
+MIT — voir / see [LICENSE](../LICENSE).
+
+---
+
+# English version
+
+## Context
+
+My own Artillery Hornet (Ruby motherboard), on which I added a BLTouch and compiled a custom Marlin firmware.
+
+## Settings added (Phase 1: leveling and convenience)
+
+The same package of options was later reused as a base for the Ender 3 Pro project (see the neighboring folder):
+
+BLTOUCH, AUTO_BED_LEVELING_BILINEAR, Z_SAFE_HOMING, PROBE_OFFSET_WIZARD, LCD_INFO_MENU, POWER_LOSS_RECOVERY, SOUND_MENU_ITEM, SDCARD_SORT_ALPHA, BABYSTEP_ALWAYS_AVAILABLE plus BABYSTEP_ZPROBE_OFFSET, and LIN_ADVANCE.
+
+## Problems encountered and solutions (field notes)
+
+This section is the most useful part if someone else runs into the same symptoms:
+
+1. The Z probe stayed permanently stuck on "TRIGGERED". The Ruby board uses the same pin for the Z endstop and the BLTouch probe by default (Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN), which caused issues. Fix: use a dedicated pin for the probe (Z_MIN_PROBE_PIN PC2 on this board) instead of sharing the endstop pin.
+
+2. The printer had to be plugged into AC power for the probe to work properly. Surprising discovery: on weak/battery power, the BLTouch did not behave normally. Worth checking if behavior seems erratic.
+
+3. Bed leveling was not applied to prints. The slicer's start G-code did not include M420 S1 after G28. Without this command, Marlin does build a bed mesh but does not apply it to the print. A classic and easy-to-forget pitfall.
+
+4. ArtillerySlicer refused to save the modified start G-code. ArtillerySlicer's system profiles are locked for writing. Fix: use "Save as" to create a custom profile, then select it.
+
+## Calibration values (last recorded)
+
+Probe X offset: -55.3. Probe Y offset: 0. Probe Z offset: -1.4.
+
+These values are specific to my probe and my setup, so they should not be reused as-is on another printer, but they give an order of magnitude.
+
+## License
+
+MIT — see LICENSE file in the parent folder.
